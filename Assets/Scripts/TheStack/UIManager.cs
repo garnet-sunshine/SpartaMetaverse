@@ -8,74 +8,79 @@ public enum UIState
     Score,
 }
 
-public class UIManager : MonoBehaviour
+namespace TheStack
 {
-    static UIManager instance;
-    public static UIManager Instance
+    public class UIManager : MonoBehaviour
     {
-        get
+        static UIManager instance;
+        public static UIManager Instance
         {
-            return instance;
+            get
+            {
+                return instance;
+            }
         }
-    }
 
-    UIState currentState = UIState.Home;
+        UIState currentState = UIState.Home;
 
-    HomeUI homeUI = null;
+        HomeUI homeUI = null;
 
-    GameUI gameUI = null;
+        GameUI gameUI = null;
 
-    ScoreUI scoreUI = null;
+        ScoreUI scoreUI = null;
 
-    TheStack theStack = null;
-    private void Awake()
-    {
-        instance = this;
-        theStack = FindObjectOfType<TheStack>();
+        TheStack theStack = null;
 
-        homeUI = GetComponentInChildren<HomeUI>(true);
-        homeUI?.Init(this);
-        gameUI = GetComponentInChildren<GameUI>(true);
-        gameUI?.Init(this);
-        scoreUI = GetComponentInChildren<ScoreUI>(true);
-        scoreUI?.Init(this);
+        private void Awake()
+        {
+            instance = this;
+            //foreach (var sp in FindObjectsByType<SpawnPoint>(FindObjectsSortMode.None))
+            theStack = FindAnyObjectByType<TheStack>();
 
-        ChangeState(UIState.Home);
-    }
+            homeUI = GetComponentInChildren<HomeUI>(true);
+            homeUI?.Init(this);
+            gameUI = GetComponentInChildren<GameUI>(true);
+            gameUI?.Init(this);
+            scoreUI = GetComponentInChildren<ScoreUI>(true);
+            scoreUI?.Init(this);
+
+            ChangeState(UIState.Home);
+        }
 
 
-    public void ChangeState(UIState state)
-    {
-        currentState = state;
-        homeUI?.SetActive(currentState);
-        gameUI?.SetActive(currentState);
-        scoreUI?.SetActive(currentState);
-    }
+        public void ChangeState(UIState state)
+        {
+            currentState = state;
+            homeUI?.SetActive(currentState);
+            gameUI?.SetActive(currentState);
+            scoreUI?.SetActive(currentState);
+        }
 
-    public void OnClickStart()
-    {
-        theStack.Restart();
-        ChangeState(UIState.Game);
-    }
+        public void OnClickStart()
+        {
+            theStack.Restart();
+            ChangeState(UIState.Game);
+        }
 
-    public void OnClickExit()
-    {
+        public void OnClickExit()
+        {
 #if UNITY_EDITOR
-        UnityEditor.EditorApplication.isPlaying = false;
+            UnityEditor.EditorApplication.isPlaying = false;
 #else
         Application.Quit(); // 어플리케이션 종료
 #endif
-    }
+        }
 
-    public void UpdateScore()
-    {
-        gameUI.SetUI(theStack.Score, theStack.Combo, theStack.MaxCombo);
-    }
+        public void UpdateScore()
+        {
+            gameUI.SetUI(theStack.Score, theStack.Combo, theStack.MaxCombo);
+        }
 
-    public void SetScoreUI()
-    {
-        scoreUI.SetUI(theStack.Score, theStack.MaxCombo, theStack.BestScore, theStack.BestCombo);
+        public void SetScoreUI()
+        {
+            scoreUI.SetUI(theStack.Score, theStack.MaxCombo, theStack.BestScore, theStack.BestCombo);
 
-        ChangeState(UIState.Score);
+            ChangeState(UIState.Score);
+        }
     }
 }

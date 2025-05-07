@@ -6,12 +6,12 @@ using UnityEngine;
 public class PlayerController : BaseController
 {
     public float speed = 5f;
-    private Camera camera; // 마우스 위치 월드 좌표 변환을 위해 카메라 참조
+    private Camera maincamera; // 마우스 위치 월드 좌표 변환을 위해 카메라 참조
 
     protected override void Start()
     {
         base.Start();
-        camera = Camera.main;
+        maincamera = Camera.main;
     }
 
     protected override void HandleAction()
@@ -22,7 +22,7 @@ public class PlayerController : BaseController
 
         // 마우스 위치 월드 좌표로 변환
         Vector2 mousePosition = Input.mousePosition;
-        Vector2 worldPos = camera.ScreenToWorldPoint(mousePosition);
+        Vector2 worldPos = maincamera.ScreenToWorldPoint(mousePosition);
         lookDirection = (worldPos - (Vector2)transform.position);
 
         // 마우스 위치까지의 방향 계산

@@ -12,7 +12,8 @@ public class BgLooper : MonoBehaviour
     
     void Start()
     {
-        Obstacle[] obstacles = GameObject.FindObjectsOfType<Obstacle>();
+        Obstacle[] obstacles = GameObject.FindObjectsByType<Obstacle>(FindObjectsSortMode.None);
+
         obstacleLastPosition = obstacles[0].transform.position;
         obstacleCount = obstacles.Length;
 

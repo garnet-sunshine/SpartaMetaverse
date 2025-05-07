@@ -22,7 +22,8 @@ public class GameManager : MonoBehaviour
     private void Awake()
     {
         gameManager = this;
-        uiManager = FindObjectOfType<UIManager>();
+        uiManager = FindFirstObjectByType<UIManager>();
+
     }
 
     private void Start()

@@ -32,7 +32,7 @@ public class PlayerSpawnManager : MonoBehaviour
 
     private Transform FindSpawnPointByID(string id)
     {
-        foreach (var sp in FindObjectsOfType<SpawnPoint>())
+        foreach (var sp in FindObjectsByType<SpawnPoint>(FindObjectsSortMode.None))
         {
             if (sp.spawnID == id)
                 return sp.transform;

@@ -8,14 +8,14 @@ public class Player : MonoBehaviour
     Animator animator;
     Rigidbody2D _rigidbody;
 
-    public float flapforce = 6f; // Á¡ÇÁÇÏ´Â Èû
-    public float forwarSpeed = 3f; // Á¤¸éÀ¸·Î ÀÌµ¿ÇÏ´Â Èû
+    public float flapforce = 6f; // ï¿½ï¿½ï¿½ï¿½ï¿½Ï´ï¿½ ï¿½ï¿½
+    public float forwarSpeed = 3f; // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ìµï¿½ï¿½Ï´ï¿½ ï¿½ï¿½
     public bool isDead = false;
-    float deathCooldown = 0f; // Á×Àº µÚ µô·¹ÀÌ 
+    float deathCooldown = 0f; // ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ 
 
     bool isFlap = false;
 
-    public bool godMode = false; // °ÔÀÓ Å×½ºÆ®¿ë
+    public bool godMode = false; // ï¿½ï¿½ï¿½ï¿½ ï¿½×½ï¿½Æ®ï¿½ï¿½
 
     GameManager gameManager;
 
@@ -24,8 +24,8 @@ public class Player : MonoBehaviour
     {
         gameManager = GameManager.Instance;
 
-        animator = GetComponentInChildren<Animator>(); // ÇÏÀ§ ¿ÀºêÁ§Æ®¿¡µµ Àû¿ë °¡´É
-        _rigidbody = GetComponent<Rigidbody2D>(); // ¿ÀºêÁ§Æ®¿¡ ±â´ÉÀÌ ´Þ·ÁÀÖ´Ù¸é ¹ÝÈ¯ÇØÁÖ´Â ±â´É
+        animator = GetComponentInChildren<Animator>(); // ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ®ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
+        _rigidbody = GetComponent<Rigidbody2D>(); // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ®ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Þ·ï¿½ï¿½Ö´Ù¸ï¿½ ï¿½ï¿½È¯ï¿½ï¿½ï¿½Ö´ï¿½ ï¿½ï¿½ï¿½
 
         if (animator == null)
             Debug.LogError("Not Founded Animator");
@@ -78,7 +78,7 @@ public class Player : MonoBehaviour
     {
         if (gameManager.currentState == GameManager.GameState.WaitingToStart)
         {
-            _rigidbody.velocity = Vector2.zero;
+            _rigidbody.linearVelocity = Vector2.zero;
             return;
         }
 
@@ -87,7 +87,7 @@ public class Player : MonoBehaviour
 
         if (isDead) return;
 
-        Vector3 velocity = _rigidbody.velocity; // °¡¼Óµµ
+        Vector3 velocity = _rigidbody.linearVelocity; // ï¿½ï¿½ï¿½Óµï¿½
         velocity.x = forwarSpeed;
 
         if (isFlap)
@@ -96,10 +96,10 @@ public class Player : MonoBehaviour
             isFlap = false;
         }
 
-        _rigidbody.velocity = velocity;
+        _rigidbody.linearVelocity = velocity;
 
-        float angle = Mathf.Clamp((_rigidbody.velocity.y * 10f), -90, 90);
-        transform.rotation = Quaternion.Euler(0, 0, angle); // È¸Àü (x, y, z)Ãà ±âÁØ
+        float angle = Mathf.Clamp((_rigidbody.linearVelocity.y * 10f), -90, 90);
+        transform.rotation = Quaternion.Euler(0, 0, angle); // È¸ï¿½ï¿½ (x, y, z)ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
     }
 
     private void OnCollisionEnter2D(Collision2D collision)

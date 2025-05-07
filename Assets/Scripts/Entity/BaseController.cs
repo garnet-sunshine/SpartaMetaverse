@@ -5,14 +5,14 @@ using UnityEngine.UIElements;
 
 public class BaseController : MonoBehaviour
 {
-    protected Rigidbody2D _rigidbody; // Ä³¸¯ÅÍ ÀÌµ¿À» À§ÇÑ ¹°¸®Á¶°Ç Ãß°¡
+    protected Rigidbody2D _rigidbody; // Ä³ï¿½ï¿½ï¿½ï¿½ ï¿½Ìµï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ß°ï¿½
 
-    [SerializeField] private SpriteRenderer characterRenderer; // Ä³¸¯ÅÍ ÁÂ¿ì¹ÝÀü
+    [SerializeField] private SpriteRenderer characterRenderer; // Ä³ï¿½ï¿½ï¿½ï¿½ ï¿½Â¿ï¿½ï¿½ï¿½ï¿½
 
-    protected Vector2 movementDirection = Vector2.zero; // ÇöÀç ÀÌµ¿ ¹æÇâ
+    protected Vector2 movementDirection = Vector2.zero; // ï¿½ï¿½ï¿½ï¿½ ï¿½Ìµï¿½ ï¿½ï¿½ï¿½ï¿½
     public Vector2 MovementDirection { get { return movementDirection; } }
 
-    protected Vector2 lookDirection = Vector2.zero; // ÇöÀç ¹Ù¶óº¸´Â ¹æÇâ
+    protected Vector2 lookDirection = Vector2.zero; // ï¿½ï¿½ï¿½ï¿½ ï¿½Ù¶óº¸´ï¿½ ï¿½ï¿½ï¿½ï¿½
     public Vector2 LookDirection { get { return lookDirection; } }
 
     protected AnimationHandler animationHandler;
@@ -48,8 +48,8 @@ public class BaseController : MonoBehaviour
 
     private void Movement(Vector2 direction)
     {
-        direction = direction * statHandler.Speed; // ÀÌµ¿ ¼Óµµ
-        _rigidbody.velocity = direction;
+        direction = direction * statHandler.Speed; // ï¿½Ìµï¿½ ï¿½Óµï¿½
+        _rigidbody.linearVelocity = direction;
         animationHandler.Move(direction);
     }
 
@@ -58,7 +58,7 @@ public class BaseController : MonoBehaviour
         float rotZ = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
         bool isLeft = Mathf.Abs(rotZ) > 90f;
 
-        characterRenderer.flipX = isLeft; // Ä³¸¯ÅÍ ¹æÇâ ¹ÝÀü
+        characterRenderer.flipX = isLeft; // Ä³ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
     }
 
 }
